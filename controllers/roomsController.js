@@ -63,16 +63,7 @@ class roomsController {
         level: level,
         description: description,
       });
-      return res.json(room);
-    } catch (e) {}
-  }
-  async checkVipStatus(req, res, next) {
-    try {
-      const { level, description } = req.body;
-      const room = await Room.create({
-        level: level,
-        description: description,
-      });
+      res.status(201);
       return res.json(room);
     } catch (e) {}
   }

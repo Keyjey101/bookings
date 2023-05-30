@@ -19,6 +19,7 @@ class clientsController {
       const client = await Client.create({
         name: name,
       });
+      res.status(201);
       return res.json(client);
     } catch (e) {}
   }

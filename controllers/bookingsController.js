@@ -18,9 +18,7 @@ class bookingsContoller {
   async create(req, res, next) {
     try {
       const { clientId, dateAt, dateTo, roomId } = req.body;
-      console.log('thisis create!!!');
       if (!dateAt || !dateTo || !clientId || !roomId) {
-        console.log('this!!!');
         res.status(402);
         res.json({
           message: 'provide data such as clientId, dateAt, dateTo, roomId',
@@ -75,13 +73,19 @@ class bookingsContoller {
         dateTo: dateTo,
         isVip: isVip,
       });
-
+      res.status(201);
       return res.json(booking);
     } catch (e) {}
   }
   async abort(req, res, next) {
     const { clientId, bookingId, roomId } = req.body;
-
+    if (!bookingId) {
+      res.status(402);
+      res.json({
+        message: 'provide data such as bookingId',
+      });
+      return next();
+    }
     // if bookingId not provided by some reason use clientId+roomId instead
     // check existing booking and so one
     try {
